@@ -1,5 +1,6 @@
 <?php 
 session_start();
+include "connection/db_conn.php";
 
 if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
     $usernmame = $_SESSION['username'];
@@ -51,57 +52,46 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Courses</h1>
                     </div>
                     <!-- Content Row -->
                     <div class="row">
-                        <div class="col-lg-6">
-                        <!-- Dropdown Card Example -->
-                        <div class="card shadow mb-4">
-                            <!-- Card Header - Dropdown -->
-                            <div
-                                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">Dropdown Card Example</h6>
-                                <div class="dropdown no-arrow">
-                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                        aria-labelledby="dropdownMenuLink">
-                                        <div class="dropdown-header">Dropdown Header:</div>
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
+                            <?php
+                            $main_id = $_SESSION['id'];
+                            $sql = "SELECT * FROM student_courses WHERE std_id = '$main_id'";
+                            $result = mysqli_query($conn, $sql);
+                            if (mysqli_num_rows($result) !== 0) {
+                                while ($row = mysqli_fetch_assoc($result)){
+                                    // To get the information on the course
+                                    $course_id = $row["course_id"];
+                                    $sql1 = "SELECT * FROM courses WHERE id = '$course_id'";
+                                    $result1 = mysqli_query($conn, $sql1);
+                                    $row1 = mysqli_fetch_assoc($result1);
+                                    $cname = $row1["gr_name"];
+                                    $desc = $row1["description"];
+                                    ?>
+                            <!-- Courses div -->
+                        <div class="col-lg-4">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary"><?php echo $cname;?></h6>
                                 </div>
-                            </div>
-                            <!-- Card Body -->
-                            <div class="card-body">
-                                Dropdown menus can be placed in the card header in order to extend the functionality
-                                of a basic card. In this dropdown card example, the Font Awesome vertical ellipsis
-                                icon in the card header can be clicked on in order to toggle a dropdown menu.
-                            </div>
-                        </div>
-
-                        <!-- Collapsable Card Example -->
-                        <div class="card shadow mb-4">
-                            <!-- Card Header - Accordion -->
-                            <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
-                                role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                                <h6 class="m-0 font-weight-bold text-primary">Collapsable Card Example</h6>
-                            </a>
-                            <!-- Card Content - Collapse -->
-                            <div class="collapse show" id="collapseCardExample">
                                 <div class="card-body">
-                                    This is a collapsable card example using Bootstrap's built in collapse
-                                    functionality. <strong>Click on the card header</strong> to see the card body
-                                    collapse and expand!
+                                    <div class="text-center">
+                                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
+                                            src="img/undraw_posting_photo.svg" alt="...">
+                                    </div>
+                                    <p><?php echo $desc ?></p>
+                                    <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
+                                        unDraw &rarr;</a>
                                 </div>
                             </div>
                         </div>
-                        </div>
+                            <!-- Courses div end -->
+                            <?php
+                                }
+                            }
+                            ?>
                     </div>
                 </div>
                 <!-- End Page Contents -->
