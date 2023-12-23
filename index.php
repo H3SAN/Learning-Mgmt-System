@@ -82,8 +82,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                                             src="img/undraw_posting_photo.svg" alt="...">
                                     </div>
                                     <p><?php echo $desc ?></p>
-                                    <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
-                                        unDraw &rarr;</a>
+                                    <a target="_blank" rel="nofollow" href="https://undraw.co/">Open course &rarr;</a>
                                 </div>
                             </div>
                         </div>
