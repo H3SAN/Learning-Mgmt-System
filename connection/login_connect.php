@@ -34,6 +34,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
             if ($row['email'] === $email && $row['password'] === $pass) {
             	$_SESSION['email'] = $row['email'];
             	$_SESSION['firstname'] = $row['first_name'];
+				$_SESSION['lastname'] = $row['last_name'];
             	$_SESSION['id'] = $row['id'];
                 $_SESSION['username'] = $row['user_name'];
             	header("Location: ../index.php");

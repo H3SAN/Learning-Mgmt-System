@@ -1,67 +1,65 @@
-<?php 
+<?php
 session_start();
 include "connection/db_conn.php";
 
 if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
     $usernmame = $_SESSION['username'];
- ?>
-<!DOCTYPE html>
-<html lang="en">
+?>
+    <!DOCTYPE html>
+    <html lang="en">
 
-<head>
+    <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-    <title><?php echo $_SESSION['username']?> - Dashboard</title>
+        <title><?php echo $_SESSION['username'] ?> - Dashboard</title>
 
-    <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+        <!-- Custom fonts for this template-->
+        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-    <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+        <!-- Custom styles for this template-->
+        <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
-</head>
+    </head>
 
-<body id="page-top">
+    <body id="page-top">
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-        <!-- SideBar -->
+        <!-- Page Wrapper -->
+        <div id="wrapper">
+            <!-- SideBar -->
             <?php include "layout/nav_bar.php" ?>
-        <!-- End of Sidebar -->
+            <!-- End of Sidebar -->
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Main Content -->
-            <div id="content">
+                <!-- Main Content -->
+                <div id="content">
 
-                <!-- Topbar -->
-                <?php include "layout/top_bar.php" ?>
-                <!-- End of Topbar -->
+                    <!-- Topbar -->
+                    <?php include "layout/top_bar.php" ?>
+                    <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Courses</h1>
-                    </div>
-                    <!-- Content Row -->
-                    <div class="row">
+                        <!-- Page Heading -->
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800">Courses</h1>
+                        </div>
+                        <!-- Content Row -->
+                        <div class="row">
                             <?php
                             $main_id = $_SESSION['id'];
                             $sql = "SELECT * FROM student_courses WHERE std_id = '$main_id'";
                             $result = mysqli_query($conn, $sql);
                             if (mysqli_num_rows($result) !== 0) {
-                                while ($row = mysqli_fetch_assoc($result)){
+                                while ($row = mysqli_fetch_assoc($result)) {
                                     // To get the information on the course
                                     $course_id = $row["course_id"];
                                     $sql1 = "SELECT * FROM courses WHERE id = '$course_id'";
@@ -69,79 +67,90 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                                     $row1 = mysqli_fetch_assoc($result1);
                                     $cname = $row1["gr_name"];
                                     $desc = $row1["description"];
-                                    ?>
-                            <!-- Courses div -->
-                        <div class="col-lg-4">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary"><?php echo $cname;?></h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="text-center">
-                                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                                            src="img/undraw_posting_photo.svg" alt="...">
+                            ?>
+                                    <!-- Courses div -->
+                                    <div class="col-lg-4">
+                                        <div class="card shadow mb-4">
+                                            <!-- Card Header - Dropdown -->
+                                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                                <h6 class="m-0 font-weight-bold text-primary"><?php echo $cname;?></h6>
+                                                <div class="dropdown no-arrow">
+                                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                                        <a class="dropdown-item" href="#">Add new Student</a>
+                                                        <a class="dropdown-item" href="#">Edit Group</a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" style="color: #e74a3b;" href="#">Delete Group</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="text-center">
+                                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/undraw_posting_photo.svg" alt="...">
+                                                </div>
+                                                <p><?php echo $desc ?></p>
+                                                <a target="_blank" rel="nofollow" href="https://undraw.co/">Open course &rarr;</a>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <p><?php echo $desc ?></p>
-                                    <a target="_blank" rel="nofollow" href="https://undraw.co/">Open course &rarr;</a>
-                                </div>
-                            </div>
-                        </div>
-                            <!-- Courses div end -->
+                                    <!-- Courses div end -->
                             <?php
                                 }
                             }
                             ?>
+                        </div>
                     </div>
+                    <!-- End Page Contents -->
+
                 </div>
-                <!-- End Page Contents -->
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; EMU CMSE 353 2023</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
 
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; EMU CMSE 353 2023</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+            <!-- End of Content Wrapper -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Page Wrapper -->
 
-    </div>
-    <!-- End of Page Wrapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="vendor/chart.js/Chart.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
+        <!-- Page level custom scripts -->
+        <script src="js/demo/chart-area-demo.js"></script>
+        <script src="js/demo/chart-pie-demo.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
+    </body>
 
-</body>
-
-</html>
-<?php 
-}else{
-     header("Location: login.php");
-     exit();
+    </html>
+<?php
+} else {
+    header("Location: login.php");
+    exit();
 }
- ?>
+?>
