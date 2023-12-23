@@ -52,18 +52,29 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                             <div class="col-lg-8">
                             <div class="card mb-4">
                                 <div class="card-header">
-                                    Add New User
+                                    Edit User
                                 </div>
                                 <div class="card-body">
                                 <h2>User Registration Form</h2>
-                                <form action="connection/add_user.php" method="post">
+                                <?php
+                        if(isset($_GET['id']))
+                        {
+                            $student_id = mysqli_real_escape_string($conn, $_GET['id']);
+                            $query = "SELECT * FROM user WHERE id='$student_id' ";
+                            $query_run = mysqli_query($conn, $query);
+
+                            if(mysqli_num_rows($query_run) > 0)
+                            {
+                                $student = mysqli_fetch_array($query_run);
+                                ?>
+                                <form action="connection/crud.php" method="post">
                                     <div class="row">
                                     <?php if (isset($_GET['error'])) { ?>
                                         <div class="form-group col-12">
      		                            <input type="text" class="form-control-plaintext danger" disabled value="<?php echo $_GET['error']; ?>">
                                         </div>
                                     <?php }
-                                    elseif (isset($_GET['error'])){?>
+                                    else if (isset($_GET['success'])){?>
                                     <div class="form-group col-12">
      		                            <input type="text" class="form-control-plaintext success" disabled value="<?php echo $_GET['success']; ?>">
                                     </div>
@@ -73,51 +84,48 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                                     <!-- First Name -->
                                     <div class="form-group col-12">
                                         <label for="studentName">First Name:</label>
-                                        <input type="text" class="form-control" id="FirstName" name="firstname" required>
+                                        <input type="text" class="form-control" id="FirstName" name="firstname" value="<?=$student['first_name'];?>" required>
                                     </div>
 
                                     <!-- Last Name -->
                                     <div class="form-group col-12">
                                         <label for="studentName">Last Name:</label>
-                                        <input type="text" class="form-control" id="LastName" name="lastname" required>
+                                        <input type="text" class="form-control" id="LastName" name="lastname" value="<?=$student['last_name'];?>" required>
                                     </div>
 
                                     <!-- user Name -->
                                     <div class="form-group col-6">
                                         <label for="username">Username:</label>
-                                        <input type="text" class="form-control" id="username" name="username" required>
+                                        <input type="text" class="form-control" id="username" name="username" value="<?=$student['user_name'];?>" required>
                                     </div>
 
                                     <!-- Email -->
                                     <div class="form-group col-lg-6">
                                         <label for="email">Email:</label>
-                                        <input type="email" class="form-control" id="email" name="email" required>
+                                        <input type="email" class="form-control" id="email" name="email" value="<?=$student['user_name'];?>" required>
                                     </div>
 
                                     <!-- Password -->
                                     <div class="form-group col-lg-6">
                                         <label for="password">Password:</label>
-                                        <input type="password" class="form-control" placeholder="Must be 8 - 20 characters long" id="password" name="password" required>
+                                        <input type="password" class="form-control" placeholder="Must be 8 - 20 characters long" id="password" value="<?=$student['password'];?>" name="password" required>
                                     </div>
 
                                     <!-- Date of Birth -->
                                     <div class="form-group col-lg-6">
                                         <label for="dob">Date of Birth:</label>
-                                        <input type="date" class="form-control" id="dob" name="dob" required>
+                                        <input type="date" class="form-control" id="dob" value="<?=$student['date_of_birth'];?>" name="dob" required>
                                     </div>
-                                        <?php 
-                                        $sql = "SELECT id, department_name FROM departments";
-                                        $result = mysqli_query($conn, $sql);
-                                        ?>
+
                                     <!-- dept -->
                                     <div class="form-group col-lg-6">
                                         <label for="dept">Department:</label>
                                         <select class="form-select form-control form-control-user" id="dept" name="dept">
-                                        <?php
-                                            // Generate options from the database query result
-                                            while ($row = $result->fetch_assoc()) {
-                                                echo "<option value='{$row['id']}'>{$row['department_name']}</option>";
-                                            }?>
+                                            <option value="<?=$student['dept_id'];?>" selected>Open this select menu</option>
+                                            
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
                                         </select>
                                     </div>
 
@@ -125,7 +133,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                                     <div class="form-group col-lg-6">
                                         <label for="role">Assign role:</label>
                                         <select class="form-select form-control form-control-user" id="role" name="role">
-                                            <option value="3" selected>Student</option>
+                                            <option value="<?=$student['role_id'];?>" selected>Student</option>
                                             <option value="2">Teacher</option>
                                             <option value="1">Admin</option>
                                         </select>
@@ -133,10 +141,18 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
 
                                     <!-- Submit Button -->
                                     <div class="col-lg-4">
-                                        <button type="submit" class="btn btn-primary">Register</button>
+                                        <button type="submit" class="btn btn-primary">Update</button>
                                     </div>
                                     </div>
                                 </form>
+                                <?php
+                            }
+                            else
+                            {
+                                echo "<h4>No Such Id Found</h4>";
+                            }
+                        }
+                        ?>
                                 </div>
                             </div>
                             </div>

@@ -18,7 +18,7 @@
 
             <!-- Nav Item - Courses -->
             <li class="nav-item active">
-                <a class="nav-link" href="../index.php">
+                <a class="nav-link" href="index.php">
                 <i class="fas fa-fw fa-book"></i>
                     <span>Courses</span></a>
             </li>
@@ -55,14 +55,14 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Create new:</h6>
-                        <a class="collapse-item" href="new_user.php">User</a>
-                        <a class="collapse-item" href="new_group.php">Group</a>
+                        <a class="collapse-item" href="new_user.php"><i class="fas fa-fw fa-user">&nbsp;</i> New User</a>
+                        <a class="collapse-item" href="new_group.php"><i class="fas fa-fw fa-book">&nbsp;</i> New Course</a>
                     </div>
                 </div>
             </li>
             <!-- Nav Item Exam Schedule -->
             <li class="nav-item">
-                <a class="nav-link" href="404.html">
+                <a class="nav-link" href="role_edit.php">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Access Priviledges</span></a>
             </li>
@@ -75,10 +75,10 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Select:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Print Transcript</a>
-                        <a class="collapse-item" href="utilities-border.html">View Admission</a>
-                        <a class="collapse-item" href="utilities-animation.html">Change Department</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
+                        <a class="collapse-item" href="utilities-color.html"><i class="fas fa-fw fa-print">&nbsp;</i>Print Transcript</a>
+                        <a class="collapse-item" href="utilities-border.html"><i class="fas fa-fw fa-envelope-open">&nbsp;</i>View Admission</a>
+                        <a class="collapse-item" href="utilities-animation.html"><i class="fas fa-fw fa-university">&nbsp;</i>Change Department</a>
+                        <a class="collapse-item" href="utilities-other.html"><i class="fas fa-fw fa-check-circle">&nbsp;</i>Other</a>
                     </div>
                 </div>
             </li>
