@@ -67,6 +67,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                                     $row1 = mysqli_fetch_assoc($result1);
                                     $cname = $row1["gr_name"];
                                     $desc = $row1["description"];
+									$img = $row1["display_image"];
                             ?>
                                     <!-- Courses dropdown -->
                                     <div class="col-lg-4">
@@ -88,10 +89,14 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                                             </div>
                                             <div class="card-body">
                                                 <div class="text-center">
-                                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/undraw_posting_photo.svg" alt="...">
+                                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem; height: 10rem;" src="<?php echo "$img";?>" alt="...">
                                                 </div>
-                                                <p><?php echo $desc ?></p>
-                                                <a target="_blank" rel="nofollow" href="https://undraw.co/">Open course &rarr;</a>
+                                                <p style="white-space: nowrap;
+													overflow: hidden;
+													text-overflow: ellipsis;
+													max-width: 250px; "><?php echo $desc ?></p>
+                                                <!-- <a target="_blank" rel="nofollow" href="course_view.php?course_id=<?php echo $course_id?>">Open course &rarr;</a> -->
+												<a href="course_view.php?course_id=<?php echo $course_id?>">Open course &rarr;</a>
                                             </div>
                                         </div>
                                     </div>

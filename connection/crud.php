@@ -55,4 +55,28 @@ if(isset($_POST['update_user']))
     }
 
 }
+
+if(isset($_GET['stdid'])& isset($_GET['course_id']))
+{
+    $course_id = mysqli_real_escape_string($conn, $_GET['course_id']);
+    $student_id = mysqli_real_escape_string($conn, $_GET['stdid']);
+
+    $sql2 = "INSERT INTO `student_courses` (`std_id`, `course_id`)
+            VALUES ('$student_id', '$course_id')";
+    $result2 = mysqli_query($conn, $sql2);
+
+    if($result2)
+    {
+        $_SESSION['message'] = "Student Updated Successfully";
+        header("Location: ../addto_group.php?id=$course_id");
+        exit(0);
+    }
+    else
+    {
+        $_SESSION['message'] = "Student Not Updated";
+        header("Location: ../role_edit.php");
+        exit(0);
+    }
+
+}
 ?>

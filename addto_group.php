@@ -78,7 +78,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                                     </thead>
                                     <tbody>
                                 <?php 
-                                    $query = "SELECT * FROM student_courses WHERE course_id = $idd";
+                                    $query = "SELECT * FROM student_courses WHERE course_id != $idd";
                                     $query_run = mysqli_query($conn, $query);
 
                                     if(mysqli_num_rows($query_run) > 0)
@@ -90,37 +90,38 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
 											// Check if the current value is different from the previous one
 											if ($student_id !== $previousValue) {
 												// Process the row or output the value
-												$student_query = "SELECT * FROM user WHERE id = $student_id";
+												$student_query = "SELECT * FROM user WHERE id = $student_id ORDER BY id ASC";
 												$run_student = mysqli_query($conn, $student_query);
-												$student = mysqli_fetch_assoc($run_student);
-												
-												$depts = $student['dept_id'];
-												$first = $student['first_name'];
-												$last = $student['last_name'];
-												$user = $student['user_name'];
-												$querydept = "SELECT * FROM departments WHERE id = $depts";
-													$query_dept = mysqli_query($conn, $querydept);
-													$deptt = mysqli_fetch_assoc($query_dept);
-													$depart_name = $deptt['department_name'];
-												$email = $student['email'];
-												$role = $student['role_id'];
-												$queryrole = "SELECT * FROM roles WHERE id = $role";
-													$query_role = mysqli_query($conn, $queryrole);
-													$roles = mysqli_fetch_assoc($query_role);
-													$role_name = $roles['role_name'];
+													if(mysqli_num_rows($run_student) > 0){
+														$student = mysqli_fetch_assoc($run_student);
+														$depts = $student['dept_id'];
+														$first = $student['first_name'];
+														$last = $student['last_name'];
+														$user = $student['user_name'];
+														$querydept = "SELECT * FROM departments WHERE id = $depts";
+														$query_dept = mysqli_query($conn, $querydept);
+														$deptt = mysqli_fetch_assoc($query_dept);
+														$depart_name = $deptt['department_name'];
+														$email = $student['email'];
+														$role = $student['role_id'];
+														$queryrole = "SELECT * FROM roles WHERE id = $role";
+															$query_role = mysqli_query($conn, $queryrole);
+															$roles = mysqli_fetch_assoc($query_role);
+															$role_name = $roles['role_name'];
 												?>
                                             <tr>
-                                                <td><?= $first; ?></td>
+                                                <td><?= $student_id; ?></td>
                                                 <td><?= $last; ?></td>
                                                 <td><?= $user; ?></td>
                                                 <td><?= $depart_name;?></td>
                                                 <td><?= $email; ?></td>
                                                 <td><?= $role_name; ?></td>
                                                 <td>
-                                                    <a href="crud.php?id=<?= $student['id']; ?>" name="add" class="btn btn-success btn-sm">Add Student</a>
+                                                    <a href="connection/crud.php?stdid=<?= $student['id'];?>&course_id=<?= $idd;?>" name="add" class="btn btn-success btn-sm">Add Student</a>
                                                 </td>
                                             </tr>
                                             <?php
+													}
 												// Update the previous value to the current one
 												$previousValue = $student_id;
 											}
