@@ -52,7 +52,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                     <!-- Content Row -->
                     <!-- <div class="row"> -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4 card-header py-3">
 							<?php
 								$idd = $_GET['id'];
 								$titquery = "SELECT * FROM courses WHERE id = '$idd';";
@@ -61,7 +61,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
 								$title = $acc['gr_name'];
 								
 							?>
-                            <h6 class="m-0 font-weight-bold text-primary">Non <?php echo "$title";?> Members</h6>
+                            <h6 class="m-0 font-weight-bold text-primary"><?php echo "$title";?> Members</h6>
+							<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
+							<i class="fas fa-plus fa-sm text-white-50"></i> Add User</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -78,7 +80,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                                     </thead>
                                     <tbody>
                                 <?php 
-                                    $query = "SELECT * FROM student_courses WHERE course_id != $idd";
+                                    $query = "SELECT * FROM student_courses WHERE course_id = $idd";
                                     $query_run = mysqli_query($conn, $query);
 
                                     if(mysqli_num_rows($query_run) > 0)
@@ -116,9 +118,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                                                 <td><?= $depart_name;?></td>
                                                 <td><?= $email; ?></td>
                                                 <td><?= $role_name; ?></td>
-                                                <td>
-                                                    <a href="connection/crud.php?stdid=<?= $student['id'];?>&course_id=<?= $idd;?>" name="add" class="btn btn-success btn-sm">Add Student</a>
-                                                </td>
                                             </tr>
                                             <?php
 													}

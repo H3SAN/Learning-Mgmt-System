@@ -79,4 +79,30 @@ if(isset($_GET['stdid'])& isset($_GET['course_id']))
     }
 
 }
+
+if(isset($_POST['c_id'])& isset($_POST['channel']))
+{
+    $course_id = mysqli_real_escape_string($conn, $_POST['c_id']);
+    $channel = mysqli_real_escape_string($conn, $_POST['channel']);
+	
+	echo $course_id;
+	echo $channel;
+    $sql2 = "INSERT INTO `channels` (`sub_gr_name`, `gr_id`)
+            VALUES ('$channel', '$course_id')";
+    $result2 = mysqli_query($conn, $sql2);
+
+    if($result2)
+    {
+        $_SESSION['message'] = "Student Updated Successfully";
+        header("Location: ../course_view.php?course_id=$course_id");
+        exit(0);
+    }
+    else
+    {
+        $_SESSION['message'] = "Student Not Updated";
+        header("Location: ../course_view.php");
+        exit(0);
+    }
+
+}
 ?>

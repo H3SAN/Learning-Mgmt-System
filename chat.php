@@ -4,13 +4,6 @@ session_start();
 include "connection/db_conn.php";
 if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
     $usernmame = $_SESSION['username'];
-	
-	$c_id = $_GET['course_id'];
-	$titquery = "SELECT * FROM courses WHERE id = '$c_id';";
-	$titquery_run = mysqli_query($conn, $titquery);
-	$acc = mysqli_fetch_assoc($titquery_run);
-	$title = $acc['gr_name'];
-	$images = $acc['display_image'];
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,54 +51,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                     <!-- Content Row -->
                     <div class="row">
 					<!-- Create Modal -->
-					<div class="modal fade" id="channelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-						aria-hidden="true">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-body">
-									<form action="connection/crud.php" method="post">
-										<div class="row">
-										
-										<!-- Course -->
-										<div class="form-group col-12">
-											<label for="studentName">Channel Name:</label>
-											<input type="text" class="form-control" id="CourseName" name="channel" required>
-										</div>
-
-										<!-- Description -->
-										<div class="form-group col-12">
-											<!-- <label for="studentName">Description:</label> -->
-											<input type="text" class="form-control" id="CourseName" hidden name="c_id" value="<?php echo $c_id;?>" required>
-										</div>
-										<!-- Submit Button -->
-										<div class="form-group col-lg-4">
-											<button type="submit" class="btn btn-success">Register</button>
-										</div>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
 					<!-- Nav main -->
 					    <div class="col-xl-3 col-lg-3">
 							<div class="mb-4">
-								<div class="text-center">
-									<img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="<?php echo $images;?>" alt="...">
-								</div>
 								<div class="d-sm-flex align-items-center justify-content-between mb-4">
-									<h3 class="h5 mb-0 text-gray-800"><?php echo "$title";?></h3>
-									<div class="dropdown no-arrow">
-                                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                                        <a class="dropdown-item" data-toggle="modal" data-target="#channelModal" href="#">Create New Channel</a>
-														<a class="dropdown-item" href="addto_group.php?id=<?php echo $c_id;?>">Add new Student</a>
-                                                        <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item" style="color: #e74a3b;" href="#">Remove Channel</a>
-                                                    </div>
-                                                </div>
+									<h3 class="h5 mb-0 text-gray-800">Chats</h3>
 								</div>
 								<hr class="sidebar-divider d-none d-md-block">
 								<ul class="sidebar navbar-nav" role="tablist">
@@ -125,22 +75,15 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
 										}
 									</style>
 									<li class="nav-item hover-div mb-2" role="presentation">
-										General
+										<div class="mb-4">
+											<div class="row">
+												<div class="col-lg-2 mb-4"><img class="img-profile rounded-circle" style="height: 35px; width: 35px;" src="img/undraw_profile.svg"></div>
+												<div class="col-lg-6 mb-4">
+													<div>hello</div>
+												</div>
+											</div>
+										</div>
 									</li>
-									<?php
-										$sql3 = "SELECT * FROM channels WHERE gr_id = '$c_id'";
-										$chquery = mysqli_query($conn, $sql3);
-										if (mysqli_num_rows($chquery) !== 0) {
-											while ($row1 = mysqli_fetch_assoc($chquery)) {
-												$ch_name = $row1["sub_gr_name"];
-										?>
-										<li class="nav-item hover-div mb-2">
-											<?php echo $ch_name; ?>
-										</li>
-									<?php
-										}
-									}
-									?>
 								</ul>
 							</div>
 						</div>

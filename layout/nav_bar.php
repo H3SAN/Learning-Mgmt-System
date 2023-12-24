@@ -24,7 +24,7 @@
             </li>
             <!-- Nav Item - Chat -->
             <li class="nav-item">
-                <a class="nav-link" href="../index.php">
+                <a class="nav-link" href="chat.php">
                     <i class="fas fa-fw fa-comment"></i>
                     <span>Chat</span></a>
             </li>
