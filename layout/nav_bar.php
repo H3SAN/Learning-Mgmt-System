@@ -57,6 +57,7 @@
                         <h6 class="collapse-header">Create new:</h6>
                         <a class="collapse-item" href="new_user.php"><i class="fas fa-fw fa-user">&nbsp;</i> New User</a>
                         <a class="collapse-item" href="new_group.php"><i class="fas fa-fw fa-book">&nbsp;</i> New Course</a>
+						<a class="collapse-item" href="new_group.php"><i class="fas fa-fw fa-tasks">&nbsp;</i> New Role</a>
                     </div>
                 </div>
             </li>

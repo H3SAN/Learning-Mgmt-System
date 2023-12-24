@@ -68,7 +68,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                                     $cname = $row1["gr_name"];
                                     $desc = $row1["description"];
                             ?>
-                                    <!-- Courses div -->
+                                    <!-- Courses dropdown -->
                                     <div class="col-lg-4">
                                         <div class="card shadow mb-4">
                                             <!-- Card Header - Dropdown -->
@@ -79,8 +79,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                                                         <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                                        <a class="dropdown-item" href="#">Add new Student</a>
-                                                        <a class="dropdown-item" href="#">Edit Group</a>
+                                                        <a class="dropdown-item" href="addto_group.php?id=<?php echo $course_id;?>">Add new Student</a>
+                                                        <a class="dropdown-item" href="#">Manage Course</a>
                                                         <div class="dropdown-divider"></div>
                                                         <a class="dropdown-item" style="color: #e74a3b;" href="#">Delete Group</a>
                                                     </div>
@@ -95,7 +95,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Courses div end -->
+                                    <!-- Courses dropdown end -->
+									
                             <?php
                                 }
                             }

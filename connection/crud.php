@@ -1,12 +1,12 @@
 <?php
 session_start();
-require 'dbcon.php';
+require 'db_conn.php';
 
 if(isset($_POST['delete_student']))
 {
     $student_id = mysqli_real_escape_string($con, $_POST['delete_student']);
 
-    $query = "DELETE FROM student WHERE id='$student_id' ";
+    $query = "DELETE FROM user WHERE id='$student_id' ";
     $query_run = mysqli_query($conn, $query);
 
     if($query_run)
@@ -23,56 +23,36 @@ if(isset($_POST['delete_student']))
     }
 }
 
-if(isset($_POST['update_student']))
+if(isset($_POST['update_user']))
 {
-    $student_id = mysqli_real_escape_string($con, $_POST['student_id']);
+    $student_id = mysqli_real_escape_string($conn, $_POST['student_id']);
 
-    $name = mysqli_real_escape_string($con, $_POST['name']);
-    $email = mysqli_real_escape_string($con, $_POST['email']);
-    $phone = mysqli_real_escape_string($con, $_POST['phone']);
-    $course = mysqli_real_escape_string($con, $_POST['course']);
+    $firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
+    $lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+	$password = mysqli_real_escape_string($conn, $_POST['password']);
+	$dob = mysqli_real_escape_string($conn, $_POST['dob']);
+    $dept = mysqli_real_escape_string($conn, $_POST['dept']);
+    $role = mysqli_real_escape_string($conn, $_POST['role']);
 
-    $query = "UPDATE students SET name='$name', email='$email', phone='$phone', course='$course' WHERE id='$student_id' ";
-    $query_run = mysqli_query($con, $query);
+
+    $query = "UPDATE user SET first_name='$firstname', last_name='$lastname', user_name='$username', email='$email', 
+	date_of_birth='$dob', dept_id='$dept', password='$password', role_id='$role' WHERE id='$student_id'";
+    $query_run = mysqli_query($conn, $query);
 
     if($query_run)
     {
         $_SESSION['message'] = "Student Updated Successfully";
-        header("Location: index.php");
+        header("Location: ../role_edit.php?success='User Successfully updated'");
         exit(0);
     }
     else
     {
         $_SESSION['message'] = "Student Not Updated";
-        header("Location: index.php");
+        header("Location: ../role_edit.php");
         exit(0);
     }
 
 }
-
-
-if(isset($_POST['save_student']))
-{
-    $name = mysqli_real_escape_string($con, $_POST['name']);
-    $email = mysqli_real_escape_string($con, $_POST['email']);
-    $phone = mysqli_real_escape_string($con, $_POST['phone']);
-    $course = mysqli_real_escape_string($con, $_POST['course']);
-
-    $query = "INSERT INTO students (name,email,phone,course) VALUES ('$name','$email','$phone','$course')";
-
-    $query_run = mysqli_query($con, $query);
-    if($query_run)
-    {
-        $_SESSION['message'] = "Student Created Successfully";
-        header("Location: student-create.php");
-        exit(0);
-    }
-    else
-    {
-        $_SESSION['message'] = "Student Not Created";
-        header("Location: student-create.php");
-        exit(0);
-    }
-}
-
 ?>

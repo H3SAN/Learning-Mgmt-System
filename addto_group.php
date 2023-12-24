@@ -53,7 +53,15 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                     <!-- <div class="row"> -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Active Users</h6>
+							<?php
+								$idd = $_GET['id'];
+								$titquery = "SELECT * FROM courses WHERE id = '$idd';";
+                                $titquery_run = mysqli_query($conn, $titquery);
+								$acc = mysqli_fetch_assoc($titquery_run);
+								$title = $acc['gr_name'];
+								
+							?>
+                            <h6 class="m-0 font-weight-bold text-primary">Non <?php echo "$title";?> Members</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -70,28 +78,37 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                                     </thead>
                                     <tbody>
                                 <?php 
-                                    $query = "SELECT * FROM user";
+                                    $query = "SELECT * FROM student_courses WHERE course_id = $idd";
                                     $query_run = mysqli_query($conn, $query);
 
                                     if(mysqli_num_rows($query_run) > 0)
                                     {
-                                        foreach($query_run as $student)
-                                        {
-                                            $depts = $student['dept_id'];
-                                            $first = $student['first_name'];
-                                            $last = $student['last_name'];
-                                            $user = $student['user_name'];
-                                            $querydept = "SELECT * FROM departments WHERE id = $depts";
-                                                $query_dept = mysqli_query($conn, $querydept);
-                                                $deptt = mysqli_fetch_assoc($query_dept);
-                                                $depart_name = $deptt['department_name'];
-                                            $email = $student['email'];
-                                            $role = $student['role_id'];
-                                            $queryrole = "SELECT * FROM roles WHERE id = $role";
-                                                $query_role = mysqli_query($conn, $queryrole);
-                                                $roles = mysqli_fetch_assoc($query_role);
-                                                $role_name = $roles['role_name'];
-                                            ?>
+										$previousValue = null;
+										while ($row = mysqli_fetch_assoc($query_run)) {
+											$student_id = $row['std_id']; // Replace 'your_column' with the actual column name
+
+											// Check if the current value is different from the previous one
+											if ($student_id !== $previousValue) {
+												// Process the row or output the value
+												$student_query = "SELECT * FROM user WHERE id = $student_id";
+												$run_student = mysqli_query($conn, $student_query);
+												$student = mysqli_fetch_assoc($run_student);
+												
+												$depts = $student['dept_id'];
+												$first = $student['first_name'];
+												$last = $student['last_name'];
+												$user = $student['user_name'];
+												$querydept = "SELECT * FROM departments WHERE id = $depts";
+													$query_dept = mysqli_query($conn, $querydept);
+													$deptt = mysqli_fetch_assoc($query_dept);
+													$depart_name = $deptt['department_name'];
+												$email = $student['email'];
+												$role = $student['role_id'];
+												$queryrole = "SELECT * FROM roles WHERE id = $role";
+													$query_role = mysqli_query($conn, $queryrole);
+													$roles = mysqli_fetch_assoc($query_role);
+													$role_name = $roles['role_name'];
+												?>
                                             <tr>
                                                 <td><?= $first; ?></td>
                                                 <td><?= $last; ?></td>
@@ -100,13 +117,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                                                 <td><?= $email; ?></td>
                                                 <td><?= $role_name; ?></td>
                                                 <td>
-                                                    <a href="user_edit.php?id=<?= $student['id']; ?>" class="btn btn-success btn-sm">Open</a>
-                                                    <form action="code.php" method="POST" class="d-inline">
-                                                        <button type="submit" name="delete_student" value="<?=$student['id'];?>" class="btn btn-danger btn-sm">Delete</button>
-                                                    </form>
+                                                    <a href="crud.php?id=<?= $student['id']; ?>" name="add" class="btn btn-success btn-sm">Add Student</a>
                                                 </td>
                                             </tr>
                                             <?php
+												// Update the previous value to the current one
+												$previousValue = $student_id;
+											}
                                         }
                                     }
                                     else
@@ -114,7 +131,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                                         echo "<h5> No Record Found </h5>";
                                     }
                                 ?>
-                                
                             </tbody>
                                 </table>
                             </div>

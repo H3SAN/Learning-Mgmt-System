@@ -55,7 +55,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                                     Edit User
                                 </div>
                                 <div class="card-body">
-                                <h2>User Registration Form</h2>
+                                <h2>Update User Information</h2>
                                 <?php
                         if(isset($_GET['id']))
                         {
@@ -81,6 +81,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                                     <?php
 
                                     } ?>
+									<input type="hidden" name="student_id" value="<?= $student['id']; ?>">
                                     <!-- First Name -->
                                     <div class="form-group col-12">
                                         <label for="studentName">First Name:</label>
@@ -95,14 +96,14 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
 
                                     <!-- user Name -->
                                     <div class="form-group col-6">
-                                        <label for="username">Username:</label>
+                                        <label for="username">User name:</label>
                                         <input type="text" class="form-control" id="username" name="username" value="<?=$student['user_name'];?>" required>
                                     </div>
 
                                     <!-- Email -->
                                     <div class="form-group col-lg-6">
                                         <label for="email">Email:</label>
-                                        <input type="email" class="form-control" id="email" name="email" value="<?=$student['user_name'];?>" required>
+                                        <input type="email" class="form-control" id="email" name="email" value="<?=$student['email'];?>" required>
                                     </div>
 
                                     <!-- Password -->
@@ -116,20 +117,24 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                                         <label for="dob">Date of Birth:</label>
                                         <input type="date" class="form-control" id="dob" value="<?=$student['date_of_birth'];?>" name="dob" required>
                                     </div>
-
+                                    <?php 
+                                        $sql = "SELECT id, department_name FROM departments";
+                                        $result = mysqli_query($conn, $sql);
+                                        ?>
                                     <!-- dept -->
                                     <div class="form-group col-lg-6">
                                         <label for="dept">Department:</label>
                                         <select class="form-select form-control form-control-user" id="dept" name="dept">
-                                            <option value="<?=$student['dept_id'];?>" selected>Open this select menu</option>
-                                            
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                        <option value="<?=$student['dept_id'];?>" selected>...</option>
+                                        <?php
+                                            // Generate options from the database query result
+                                            while ($row = $result->fetch_assoc()) {
+                                                echo "<option value='{$row['id']}'>{$row['department_name']}</option>";
+                                            }?>
                                         </select>
                                     </div>
 
-                                    <!-- dept -->
+                                    <!-- role -->
                                     <div class="form-group col-lg-6">
                                         <label for="role">Assign role:</label>
                                         <select class="form-select form-control form-control-user" id="role" name="role">
@@ -141,7 +146,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
 
                                     <!-- Submit Button -->
                                     <div class="col-lg-4">
-                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <button type="submit" name="update_user" class="btn btn-primary">Update</button>
                                     </div>
                                     </div>
                                 </form>
