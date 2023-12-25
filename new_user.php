@@ -63,7 +63,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
      		                            <input type="text" class="form-control-plaintext danger" disabled value="<?php echo $_GET['error']; ?>">
                                         </div>
                                     <?php }
-                                    elseif (isset($_GET['error'])){?>
+                                    elseif (isset($_GET['success'])){?>
                                     <div class="form-group col-12">
      		                            <input type="text" class="form-control-plaintext success" disabled value="<?php echo $_GET['success']; ?>">
                                     </div>
@@ -121,7 +121,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                                         </select>
                                     </div>
 
-                                    <!-- dept -->
+                                    <!-- role -->
                                     <div class="form-group col-lg-6">
                                         <label for="role">Assign role:</label>
                                         <select class="form-select form-control form-control-user" id="role" name="role">

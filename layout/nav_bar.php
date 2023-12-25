@@ -1,3 +1,25 @@
+		<?php 
+			$role_id = $_SESSION['role_id'];
+			$permit = 'hidden';
+			$permit2 = 'hidden';
+			$permit3 = 'hidden';
+
+			if($role_id == 1){
+				$permit = '';
+				$permit2 = '';
+				$permit3 = '';
+			}
+			elseif ($role_id >= 2){
+				$permit = 'hidden';
+				$permit2 = '';
+				$permit3 = '';
+			}
+			else {
+				$permit = 'hidden';
+				$permit2 = 'hidden';
+				$permit3 = '';
+			}
+		?>
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -43,11 +65,11 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
             <!-- Heading -->
-            <div class="sidebar-heading">
+            <div  class="sidebar-heading">
                 Actions
             </div>
             <!-- Nav Item - create menu -->
-            <li class="nav-item">
+            <li <?php echo $permit3;?> class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-plus-circle"></i>
                     <span>Create</span>
@@ -55,14 +77,14 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Create new:</h6>
-                        <a class="collapse-item" href="new_user.php"><i class="fas fa-fw fa-user">&nbsp;</i> New User</a>
+                        <a <?php echo $permit;?> class="collapse-item" href="new_user.php"><i class="fas fa-fw fa-user">&nbsp;</i> New User</a>
                         <a class="collapse-item" href="new_group.php"><i class="fas fa-fw fa-book">&nbsp;</i> New Course</a>
-						<a class="collapse-item" href="new_group.php"><i class="fas fa-fw fa-tasks">&nbsp;</i> New Role</a>
+						<a <?php echo $permit;?> class="collapse-item" href="new_group.php"><i class="fas fa-fw fa-tasks">&nbsp;</i> New Role</a>
                     </div>
                 </div>
             </li>
             <!-- Nav Item Exam Schedule -->
-            <li class="nav-item">
+            <li <?php echo $permit;?> class="nav-item">
                 <a class="nav-link" href="role_edit.php">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Access Priviledges</span></a>

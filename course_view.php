@@ -57,7 +57,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                 <div class="container-fluid">
                     <!-- Content Row -->
                     <div class="row">
-					<!-- Create Modal -->
+					<!-- Create channel Modal -->
 					<div class="modal fade" id="channelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 						aria-hidden="true">
 						<div class="modal-dialog" role="document">
@@ -95,13 +95,14 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
 								</div>
 								<div class="d-sm-flex align-items-center justify-content-between mb-4">
 									<h3 class="h5 mb-0 text-gray-800"><?php echo "$title";?></h3>
-									<div class="dropdown no-arrow">
+									<div <?php echo $permit2;?> class="dropdown no-arrow">
                                                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                                                         <a class="dropdown-item" data-toggle="modal" data-target="#channelModal" href="#">Create New Channel</a>
-														<a class="dropdown-item" href="addto_group.php?id=<?php echo $c_id;?>">Add new Student</a>
+														<a class="dropdown-item" href="addto_group.php?id=<?php echo $c_id;?>">View Members</a>
+														<a class="dropdown-item" data-toggle="modal" data-target="#membermodal" href="#">Add a new Member</a>
                                                         <div class="dropdown-divider"></div>
                                                         <a class="dropdown-item" style="color: #e74a3b;" href="#">Remove Channel</a>
                                                     </div>
@@ -159,6 +160,21 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
 											<div>
 												<h6 class="m-0 text">Philosophy is the study of fundamental questions concerning existence, knowledge, values, reason, mind, and language. It explores abstract and conceptual aspects of human experience, aiming to deepen our understanding of the world and our place in it. </h6>
 											</div>
+											<div>
+												<h6 class="m-0 text-white">Philosophy is the study of fundamental questions concerning existence, knowledge, values, reason, mind, and language. It explores abstract and conceptual aspects of human experience, aiming to deepen our understanding of the world and our place in it. </h6>
+											</div>
+											<div>
+												<h6 class="m-0 text-white">Philosophy is the study of fundamental questions concerning existence, knowledge, values, reason, mind, and language. It explores abstract and conceptual aspects of human experience, aiming to deepen our understanding of the world and our place in it. </h6>
+											</div>
+											<div>
+												<h6 class="m-0 text-white">Philosophy is the study of fundamental questions concerning existence, knowledge, values, reason, mind, and language. It explores abstract and conceptual aspects of human experience, aiming to deepen our understanding of the world and our place in it. </h6>
+											</div>
+											<div>
+												<h6 class="m-0 text-white">Philosophy is the study of fundamental questions concerning existence, knowledge, values, reason, mind, and language. It explores abstract and conceptual aspects of human experience, aiming to deepen our understanding of the world and our place in it. </h6>
+											</div>
+											<div>
+												<h6 class="m-0 text-white">Philosophy is the study of fundamental questions concerning existence, knowledge, values, reason, mind, and language. It explores abstract and conceptual aspects of human experience, aiming to deepen our understanding of the world and our place in it. </h6>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -211,6 +227,26 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+	
+	<!-- jQuery for handling selection change -->
+<script>
+    $(document).ready(function() {
+        $('#exampleSelect').on('change', function() {
+            var selectedValues = $(this).val();
+            $.ajax({
+                type: 'POST',
+                url: 'saveSelection.php?=$_GET['course_id'];', // Replace with your server-side script URL
+                data: { selectedValues: selectedValues },
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>
 
 </body>
 

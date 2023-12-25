@@ -49,24 +49,33 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 	}
     else{
 
-		// hashing the password
-        // $pass = md5($pass);
+		// Encrypting the Password
+		$salt = date('Ymd');
+		
+		// Combine the password and salt
+		$passwordWithSalt = $password . $salt;
+		
+		
+		// Hash the password using DES
+		$hashedPassword = crypt($passwordWithSalt, $salt);
 
-	    $sql = "SELECT * FROM user WHERE user_name='$usename' ";
+		// Check if Username is taken
+	    $sql = "SELECT * FROM user WHERE user_name='$usename' AND email='$email'";
 		$result = mysqli_query($conn, $sql);
+		$acc = mysqli_fetch_assoc($result);
 
 		if (mysqli_num_rows($result) > 0) {
-			header("Location: ../new_user.php?error=The user name is taken try another");
+			header("Location: ../new_user.php?error=This Account already exist!");
 	        exit();
 		}else {
-           $sql2 = "INSERT INTO `user` (`id`, `user_name`, `first_name`, `last_name`, `date_of_birth`, `role_id`, `dept_id`, `email`, `password`, `date_created`)
-            VALUES (NULL, '$usename', '$fname', '$lname', '$dob', '$role', '$dept', '$email', '$password', current_timestamp())";
+           $sql2 = "INSERT INTO `user` (`id`, `user_name`, `first_name`, `last_name`, `date_of_birth`, `role_id`, `dept_id`, `email`, `password`, `salt`, `date_created`)
+            VALUES (NULL, '$usename', '$fname', '$lname', '$dob', '$role', '$dept', '$email', '$hashedPassword',  '$salt', current_timestamp())";
            $result2 = mysqli_query($conn, $sql2);
            if ($result2) {
            	 header("Location: ../new_user.php?success=Account has been created successfully");
 	         exit();
            }else {
-	           	header("Location: ../new_user.php?error=unknown error occurred&$user_data");
+	           	header("Location: ../new_user.php?error=unknown error occurred");
 		        exit();
            }
 		}

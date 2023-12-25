@@ -3,6 +3,7 @@ session_start();
 include "connection/db_conn.php";
 if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
     $usernmame = $_SESSION['username'];
+	$c_id = $_GET['id'];
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,9 +63,39 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
 								
 							?>
                             <h6 class="m-0 font-weight-bold text-primary"><?php echo "$title";?> Members</h6>
-							<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
+							<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" data-toggle="modal" data-target="#membermodal">
 							<i class="fas fa-plus fa-sm text-white-50"></i> Add User</a>
                         </div>
+						<!-- new member modal -->
+					<div class="modal fade" id="membermodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-body">
+										<?php 
+											$sql = "SELECT * FROM user WHERE role_id ='2' OR role_id='3'";
+											$result = mysqli_query($conn, $sql);
+                                        ?>
+									<form action="connection/crud.php" method="post">
+										<div class="form-group col-lg-12">
+											<input type="text" class="form-control" hidden id="CourseName" name="c_id" value="<?php echo $c_id;?>" required>
+											<label for="exampleSelect" class="form-label">select student:</label>
+											<select class="form-select form-control form-control-user" id="exampleSelect" name="std_id">
+												<?php
+													// Generate options from the database query result
+													while ($row = $result->fetch_assoc()) {
+														echo "<option value='{$row['id']}'>{$row['first_name']} {$row['last_name']}</option>";
+												}?>
+											</select>
+										</div>
+										<div class="form-group col-lg-4">
+											<button class="btn btn-success" type="submit">Register</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

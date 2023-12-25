@@ -79,8 +79,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                                                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                                                     </a>
-                                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                                        <a class="dropdown-item" href="addto_group.php?id=<?php echo $course_id;?>">Add new Student</a>
+                                                    <div <?php echo $permit2;?> class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                                        <a class="dropdown-item" href="addto_group.php?id=<?php echo $course_id;?>">View Members</a>
                                                         <a class="dropdown-item" href="#">Manage Course</a>
                                                         <div class="dropdown-divider"></div>
                                                         <a class="dropdown-item" style="color: #e74a3b;" href="#">Delete Group</a>

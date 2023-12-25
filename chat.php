@@ -58,7 +58,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
 									<h3 class="h5 mb-0 text-gray-800">Chats</h3>
 								</div>
 								<hr class="sidebar-divider d-none d-md-block">
-								<ul class="sidebar navbar-nav" role="tablist">
+								<ul class="navbar-nav" role="tablist">
 									<style>
 										.hover-div {
 											line-height: 23px;
@@ -74,12 +74,57 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
 											color: #000000;
 										}
 									</style>
-									<li class="nav-item hover-div mb-2" role="presentation">
-										<div class="mb-4">
+									<li class="nav-item hover-div" role="presentation">
+										<div class="mb-0">
 											<div class="row">
 												<div class="col-lg-2 mb-4"><img class="img-profile rounded-circle" style="height: 35px; width: 35px;" src="img/undraw_profile.svg"></div>
-												<div class="col-lg-6 mb-4">
-													<div>hello</div>
+												<div class="col-lg-10 mb-4">
+													<div class=" col-lg-12 font-weight-bold">Mike Johnson</div>
+													<div class=" col-lg-12 text-50 small">Hey, i wanted to check up on that assignm...</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li class="nav-item hover-div" role="presentation">
+										<div class="mb-0">
+											<div class="row">
+												<div class="col-lg-2 mb-4"><img class="img-profile rounded-circle" style="height: 35px; width: 35px;" src="img/undraw_profile_1.svg"></div>
+												<div class="col-lg-10 mb-4">
+													<div class=" col-lg-12 font-weight-bold">Frank Lithman</div>
+													<div class="col-lg-12 text-50 small">Where did you say i should check for the...</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li class="nav-item hover-div" role="presentation">
+										<div class="mb-0">
+											<div class="row">
+												<div class="col-lg-2 mb-4"><img class="img-profile rounded-circle" style="height: 35px; width: 35px;" src="img/undraw_profile_2.svg"></div>
+												<div class="col-lg-10 mb-4">
+													<div class=" col-lg-12 font-weight-bold">John Greea</div>
+													<div class=" col-lg-12 text-50 small">Thanks, ive recieved the data. I should be...</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li class="nav-item hover-div" role="presentation">
+										<div class="mb-0">
+											<div class="row">
+												<div class="col-lg-2 mb-4"><img class="img-profile rounded-circle" style="height: 35px; width: 35px;" src="img/undraw_profile_3.svg"></div>
+												<div class="col-lg-10 mb-4">
+													<div class=" col-lg-12 font-weight-bold">Robert Ackerman</div>
+													<div class=" col-lg-12 text-50 small">This is the link to the better version of...</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li class="nav-item hover-div" role="presentation">
+										<div class="mb-0">
+											<div class="row">
+												<div class="col-lg-2 mb-4"><img class="img-profile rounded-circle" style="height: 35px; width: 35px;" src="img/undraw_profile_1.svg"></div>
+												<div class="col-lg-10 mb-4">
+													<div class=" col-lg-12 font-weight-bold">Jennifer Daltons</div>
+													<div class=" col-lg-12 text-50 small">Hey, i wanted to check up on that assignm...</div>
 												</div>
 											</div>
 										</div>
@@ -89,20 +134,17 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
 						</div>
 					<!-- channel main -->
 					    <div class="col-xl-9 col-lg-9">
-							<div class="card shadow mb-4">
+							<div style="height: 500px;" class="card shadow mb-4">
 								<div class="card-body">
 									<div class="row">
-										<div class="col-lg-0">
-											<img class="img-profile rounded-circle" style="height: 45px; width: 45px;" src="img/undraw_profile.svg">
-										</div>
-										<div class="col-lg-11">
-											<div class="mb-2">
-												<h6 class="m-0 font-weight-bold text-primary">Hyeladi Malgwi 19:26</h6>
-											</div>
-											<div>
-												<h6 class="m-0 text">Philosophy is the study of fundamental questions concerning existence, knowledge, values, reason, mind, and language. It explores abstract and conceptual aspects of human experience, aiming to deepen our understanding of the world and our place in it. </h6>
+										<div class="col-lg-6 mb-4">
+										<div class="card bg-light text-black shadow">
+											<div class="card-body">
+													<h6 class="m-0 text">Philosophy is the study of fundamental questions concerning existence, knowledge, values, reason, mind, and language. It explores abstract and conceptual aspects of human experience, aiming to deepen our understanding of the world and our place in it. </h6>
+												<div class="text-black-50 small">12:24</div>
 											</div>
 										</div>
+									</div>
 									</div>
 								</div>
 								<div class="card-footer">
